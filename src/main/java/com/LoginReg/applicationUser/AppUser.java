@@ -29,8 +29,8 @@ public class AppUser implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String userName;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String password;
 	@Enumerated(EnumType.STRING)
@@ -38,18 +38,17 @@ public class AppUser implements UserDetails {
 	private Boolean locked;
 	private Boolean enabled;
 
-	public AppUser(String name, String userName, String email, String password, AppUserRole appUserRole, Boolean locked,
-			Boolean enabled) {
+	public AppUser(String name, String lastName, String email, String password, AppUserRole appUserRole) {
 		super();
-		this.name = name;
-		this.userName = userName;
+		this.firstName = name;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.appUserRole = appUserRole;
-		this.locked = locked;
-		this.enabled = enabled;
+	
 	}
 
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
@@ -63,7 +62,7 @@ public class AppUser implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return userName;
+		return email;
 	}
 
 	@Override
