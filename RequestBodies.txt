@@ -1,0 +1,10 @@
+
+
+POST :    http://localhost:9090/api/v1/registration
+
+{
+    "firstName":"oussama",
+    "lastName":"Zaghdoud",
+    "password":"oussama12",
+    "email":"oussama@mail.com"
+}
