@@ -38,11 +38,12 @@ public class RegistrationService {
 	}
 
 	@Transactional
-	public String confirmToken(String token) {
+	public String confirmToken(String token) {		
+		
 		ConfirmationToken confirmationToken = confirmationTokenService.getToken(token);
 
 		if (confirmationToken.getConfirmedAt() != null) {
-			throw new IllegalStateException("Email already confirmed !");
+			return "Email already confirmed !";
 		}
 		LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 		if (expiredAt.isBefore(LocalDateTime.now())) {

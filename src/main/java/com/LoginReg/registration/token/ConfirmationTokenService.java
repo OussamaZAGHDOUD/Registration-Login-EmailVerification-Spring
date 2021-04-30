@@ -1,5 +1,7 @@
 package com.LoginReg.registration.token;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ public class ConfirmationTokenService {
 	
 	public ConfirmationToken setConfirmedAt(String token) {
 		ConfirmationToken conf=confirmationTokenRepository.findByToken(token).orElseThrow(()-> new IllegalStateException("Token not found !"));
+		conf.setConfirmedAt(LocalDateTime.now());
 		confirmationTokenRepository.save(conf);
 		return conf; 
 	}

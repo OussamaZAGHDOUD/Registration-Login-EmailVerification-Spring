@@ -31,9 +31,13 @@ public class AppUserService implements UserDetailsService {
 	}
 
 	public String singUpUser(AppUser appUser) {
+		
 		boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
 		if (userExists)
-			throw new IllegalStateException("Email already taken by another user");
+			if(appUser.getEnabled())
+			throw new IllegalStateException("User exist and email already confirmed");
+		// we can add here some code to verify if the user exists we and it try to change his information 
+		// we can delete all Tokens with the UserId and save the new informations of this user and send a verication Token again
 		String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
 		appUser.setPassword(encodedPassword);
 		appUserRepository.save(appUser);

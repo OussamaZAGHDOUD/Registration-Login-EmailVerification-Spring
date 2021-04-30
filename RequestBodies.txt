@@ -8,3 +8,8 @@ POST :    http://localhost:9090/api/v1/registration
     "password":"oussama12",
     "email":"oussama@mail.com"
 }
+
+
+
+
+GET :    http://localhost:9090/api/v1/registration/confirm?token=    <you token here>
