@@ -47,5 +47,13 @@ public class AppUserService implements UserDetailsService {
 		 
 		return token;
 	}
+	
+	
+	
+	public void enableAppUser(String email) {
+	AppUser appUser=	appUserRepository.findByEmail(email).orElseThrow(()->new IllegalStateException("User not found !"));
+	appUser.setEnabled(true);
+	appUserRepository.save(appUser);
+	}
 
 }
